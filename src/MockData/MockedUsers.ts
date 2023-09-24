@@ -1,17 +1,17 @@
 // Define a TypeScript interface to represent user login data
-interface User {
+export interface User {
     name: string;
     lastName: string;
     age: number;
     country: string;
     address: string;
-    employmentStatus: 'Student' | 'Working';
+    employmentStatus: string;
     email: string;
     password: string;
   }
   
   // Mocked user login data
-  const mockedUsers: User[] = [
+  export const mockedUsers: User[] = [
     {
       name: 'John',
       lastName: 'Doe',

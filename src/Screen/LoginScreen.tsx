@@ -1,17 +1,23 @@
-import { View, Text, TextInput, StyleSheet, Button } from "react-native";
+import { View, Text, TextInput, StyleSheet, Button} from "react-native";
+import { mockedUsers } from "../MockData/MockedUsers";
+import {useState} from "react"
 
 export default function LoginScreen() {
-    function handleLogin(){}
+    const[mail, setMail] = useState("")
+    const [password, setPassword] = useState ("")
+    function handleLogin(){
+        const user = mockedUsers.find(u => u.email == mail && u.password == password)
+    }
   return (
     <View>
-      <TextInput
+       <TextInput
         style={styles.input}
-        // onChangeText={onChangeNumber}
+        onChangeText={(text) => setMail(text)} 
         placeholder="learnreact@react.com"
       />
       <TextInput
         style={styles.input}
-        // onChangeText={onChangeNumber}
+        onChangeText={(text) => setPassword(text)} 
         placeholder="************"
       />
       <Button title="Log in" onPress={handleLogin}></Button>
