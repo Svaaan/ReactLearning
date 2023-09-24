@@ -54,14 +54,3 @@ export interface User {
     },
   ];
   
-  // Example: Accessing the first mocked user's data
-  const firstUser = mockedUsers[0];
-  console.log('First User:');
-  console.log(`Name: ${firstUser.name} ${firstUser.lastName}`);
-  console.log(`Age: ${firstUser.age}`);
-  console.log(`Country: ${firstUser.country}`);
-  console.log(`Address: ${firstUser.address}`);
-  console.log(`Employment Status: ${firstUser.employmentStatus}`);
-  console.log(`Email: ${firstUser.email}`);
-  console.log(`Password: ${firstUser.password}`);
-  
