@@ -1,4 +1,3 @@
-// HomeScreen.tsx
 import React from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
 import { Button } from "react-native-paper";
@@ -19,13 +18,11 @@ export default function HomeScreen({navigation}: Props) {
         <Button
           mode="contained"
           style={[styles.button, { backgroundColor: "rgb(97, 219, 251)" }]}
-          onPress={() => {
-            // Handle navigation to the Create Account screen here
-          }}
+          onPress={() => {}}
         >
-          <Text>Create Account</Text>
+          <Text style={styles.buttonText}>Create Account</Text>
         </Button>
-        <View style={styles.buttonSpacing} />
+        <View/>
         <Button
           mode="contained"
           style={[styles.button, { backgroundColor: "rgb(97, 219, 251)" }]}
@@ -33,7 +30,7 @@ export default function HomeScreen({navigation}: Props) {
             navigation.navigate("Login");
           }}
         >
-          <Text>Login</Text>
+          <Text style={styles.buttonText}>Login</Text>
         </Button>
       </View>
     </View>
@@ -44,12 +41,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    
+    backgroundColor: "white"
   },
   image: {
     height: 110, 
     width: 125, 
-    marginTop: 150, 
+    marginTop: 80, 
     margin: 50
   },
   welcomeText: {
@@ -63,8 +60,12 @@ const styles = StyleSheet.create({
   button: {
     borderRadius: 25,
     margin: 30,
+    width: 200, // Set a fixed width for the buttons
+    height: 50,
+    alignContent: 'center',
+    justifyContent: 'center',
   },
-  buttonSpacing: {
-    width: 10,
+  buttonText: {
+    fontSize: 17,
   },
 });
