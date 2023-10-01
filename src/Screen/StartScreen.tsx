@@ -38,7 +38,7 @@ export default function StartScreen({navigation}: Props) {
       <View style={styles.buttonContainer}>
         <Button
           mode="contained"
-          style={[styles.button, { backgroundColor: "rgb(97, 219, 251)" }]}
+          style={[styles.button]}
           onPress={() => {}}
         >
           <Text style={styles.buttonText}>Document</Text>
@@ -46,14 +46,14 @@ export default function StartScreen({navigation}: Props) {
         <View />
         <Button
           mode="contained"
-          style={[styles.button, { backgroundColor: "rgb(97, 219, 251)" }]}
+          style={[styles.button]}
           onPress={() => {navigation.navigate("Tutorial")}}
         >
           <Text style={styles.buttonText}>Tutorials</Text>
         </Button>
         <Button
           mode="contained"
-          style={[styles.button, { backgroundColor: "rgb(97, 219, 251)" }]}
+          style={[styles.button]}
           onPress={() => {}}
         >
           <Text style={styles.buttonText}>Assignments</Text>
@@ -78,6 +78,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   button: {
+    backgroundColor: "rgb(97, 219, 251)",
     borderRadius: 25,
     marginVertical: 30,
     width: 200,
