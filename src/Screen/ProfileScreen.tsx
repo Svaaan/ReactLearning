@@ -1,13 +1,11 @@
 import React from "react";
-import { View, StyleSheet, Text, TouchableOpacity} from "react-native";
-import { Button, Avatar} from "react-native-paper"; // Import Avatar for displaying user image
+import { View, StyleSheet, Text, TouchableOpacity, Image } from "react-native";
+import { Button, Avatar } from "react-native-paper";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../Navigation/Navigation";
-import { User } from "../MockData/MockedUsers";
 import { useUserContext } from "../Context/UserContext";
 import { Ionicons } from "@expo/vector-icons";
-import { AntDesign } from '@expo/vector-icons'; 
-
+import { AntDesign } from '@expo/vector-icons';
 
 type Props = NativeStackScreenProps<RootStackParamList, "Profile">;
 
@@ -17,45 +15,43 @@ export default function ProfilePage() {
   return (
     <View style={styles.container}>
       <Avatar.Image
-        source={{ uri: 'https://i.imgur.com/ptFw8jV.jpg' }} // Use the provided image link
-        size={100} // Adjust the size as needed
+        source={{ uri: 'https://i.imgur.com/ptFw8jV.jpg' }}
+        size={100}
         style={styles.profileIcon}
       />
       <Text style={styles.userNameText}>
         {user.name} {user.lastName}
       </Text>
-      <View style={styles.utilityIcons} >
-
-      <TouchableOpacity onPress={() => {}}>
-      <Ionicons
-       style={styles.share} 
-       name="share-social-outline" 
-       size={24} color="black" 
-       />
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => {}}>
-        <AntDesign style={styles.edit} name="edit" size={24} color="black" />
-
-        </TouchableOpacity>
+      <View style={styles.userInfoContainer}>
+        <View style={styles.utilityIcons}>
+          <TouchableOpacity onPress={() => {}}>
+            <Ionicons
+              style={styles.icon}
+              name="share-social-outline"
+              size={24}
+              color="black"
+            />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => {}}>
+            <AntDesign style={styles.icon} name="edit" size={24} color="black" />
+          </TouchableOpacity>
+        </View>
+        <Text style={styles.userInfoText}>
+          Email: {user.email}
+        </Text>
+        <Text style={styles.userInfoText}>
+          Address: {user.address}
+        </Text>
+        <Text style={styles.userInfoText}>
+          Country: {user.country}
+        </Text>
+        <Text style={styles.userInfoText}>
+          Employment Status: {user.employmentStatus}
+        </Text>
       </View>
-      
-      <Text style={styles.userInfoText}>
-        Email: {user.email}
-      </Text>
-      <Text style={styles.userInfoText}>
-        Address: {user.address}
-      </Text>
-      <Text style={styles.userInfoText}>
-        Country: {user.country}
-      </Text>
-      <Text style={styles.userInfoText}>
-        Employment Status: {user.employmentStatus}
-      </Text>
-
     </View>
   );
 }
-
 
 const styles = StyleSheet.create({
   container: {
@@ -64,29 +60,34 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     padding: 20,
   },
-
   userNameText: {
     fontSize: 25,
-    marginVertical: 20,
+    marginVertical: 5,
     fontWeight: "bold",
-    margin: 10,
   },
   userInfoText: {
     fontSize: 18,
     marginVertical: 15,
   },
   profileIcon: {
-    marginVertical: 20,
+    marginVertical: 25,
   },
-  utilityIcons:{
+  utilityIcons: {
     flexDirection: "row",
     alignItems: "center",
-    
+    alignContent: "space-between"
   },
-  share: {
-    margin: 15,
+  icon: {
+    marginLeft: 10,
+    margin: 25,
   },
-  edit: {
-    margin: 15,
-  }
+  
+  userInfoContainer: {
+    backgroundColor: "rgb(97, 219, 251)", 
+    borderRadius: 20, 
+    padding: 20, 
+    marginVertical: 30, 
+    width: "100%", 
+    alignItems: "center"
+  },
 });

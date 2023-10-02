@@ -6,10 +6,12 @@ export async function loginUser(email: string, password: string) {
     return {
       success: true,
       user: user
-    } as const
+    } as const;
+  } else {
+    return {
+      success: false,
+      error: "Wrong email or password"
+    } as const;
   }
-  return {
-    success: false,
-    error: "User not found"
-  } as const
 }
+

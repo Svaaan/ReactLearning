@@ -1,6 +1,8 @@
-import { ReactNode, createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { User } from "../MockData/MockedUsers";
 import { loginUser } from "../api/user";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { getUserFromAsyncStorage, storeUser } from "../../AsyncStorage";
 
 type UserContextType = {
   user: User;
@@ -9,7 +11,7 @@ type UserContextType = {
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
-export function UserProvider({ children }: { children: ReactNode }) {
+export function UserProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User>({
     name: "",
     lastName: "",
@@ -24,12 +26,35 @@ export function UserProvider({ children }: { children: ReactNode }) {
   const login = async (email: string, password: string) => {
     const result = await loginUser(email, password);
     if (result.success) {
-      setUser(result.user);
+      try {
+        await storeUser(result.user);
+        const userFromAsyncStorage = await getUserFromAsyncStorage();
+        if (userFromAsyncStorage) {
+          setUser(userFromAsyncStorage);
+        }
+      } catch (e) {
+        console.log("kunde inte lägga till i async storage");
+      }
     } else {
-      // setErrorMessage(result.error);
+      console.log(result.error);
+      return result.success;
     }
     return result.success;
   };
+
+
+  //Att den hämtar usern från async storage regelbundet kanske?
+
+  // const = async () => {
+  //   const user = await getUserFromAsyncStorage();
+  //   if(user){
+  //     setUser(user);
+  //   }
+  // }
+
+  // useEffect(() => {
+
+  // }, []); 
 
   return (
     <UserContext.Provider value={{ user, login }}>
@@ -42,7 +67,7 @@ export function useUserContext(): UserContextType {
   const context = useContext(UserContext);
   if (!context) {
     throw new Error(
-      "to use UserContext you must place it inside UserProvider tagsen"
+      "To use UserContext, you must place it inside UserProvider."
     );
   }
   return context;

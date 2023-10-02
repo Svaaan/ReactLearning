@@ -1,5 +1,4 @@
 import { View, Text, TextInput, StyleSheet } from "react-native";
-import { mockedUsers } from "../MockData/MockedUsers";
 import { useState } from "react";
 import { Button } from "react-native-paper";
 import { useUserContext } from "../Context/UserContext";
@@ -12,16 +11,22 @@ export default function LoginScreen({ navigation }: Props) {
   const [mail, setMail] = useState("");
   const [password, setPassword] = useState("");
   const { login } = useUserContext();
+  const [errorMessage, setErrorMessage] = useState("");
 
   async function handleLogin() {
     const success = await login(mail, password);
     if (success) {
       navigation.navigate("Start");
     }
+    else{
+      setErrorMessage("Fel lösenord eller email.");
+    }
+    
   }
 
   return (
     <View style={styles.container}>
+      {errorMessage ? (<Text>{errorMessage}</Text>) : ("")}
       <TextInput
         style={styles.input}
         onChangeText={(text) => setMail(text)}
@@ -35,9 +40,10 @@ export default function LoginScreen({ navigation }: Props) {
       />
       <Button
         mode="contained"
-        style={[styles.button, { backgroundColor: "rgb(97, 219, 251)" }]}
+        style={[styles.button,]}
         onPress={handleLogin}
       >
+        <Text>{}</Text>
         <Text style={styles.buttonText}>Login</Text>
       </Button>
     </View>
@@ -60,6 +66,7 @@ const styles = StyleSheet.create({
     borderColor: "black",
   },
   button: {
+    backgroundColor: "rgb(97, 219, 251)" ,
     borderRadius: 25,
     margin: 30,
     width: 200, // Set a fixed width for the buttons
