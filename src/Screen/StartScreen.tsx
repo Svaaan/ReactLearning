@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import { Button } from "react-native-paper";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../Navigation/Navigation";
@@ -8,24 +8,28 @@ import { Ionicons } from "@expo/vector-icons";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Start">;
 
-export default function StartScreen({navigation}: Props) {
+export default function StartScreen({ navigation }: Props) {
   const { user } = useUserContext();
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <TouchableOpacity onPress={() => {}}>
           <Ionicons
-            style={styles.darkMode}
+            style={[styles.icon, styles.darkMode]}
             name="moon-sharp"
             size={40}
             color="black"
           />
         </TouchableOpacity>
-        <Text style={styles.userNameText}>{user.name}</Text>
-        <TouchableOpacity onPress={() => {navigation.navigate("Profile");
-      }}>
+
+        <Image
+          source={{ uri: "https://i.imgur.com/J0dixkv.png" }}
+          style={styles.image}
+        />
+
+        <TouchableOpacity onPress={() => { navigation.navigate("Profile"); }}>
           <Ionicons
-            style={styles.profileIcon}
+            style={[styles.icon, styles.profileIcon]}
             name="person-circle-sharp"
             size={50}
             color="black"
@@ -39,7 +43,7 @@ export default function StartScreen({navigation}: Props) {
         <Button
           mode="contained"
           style={[styles.button]}
-          onPress={() => {}}
+          onPress={() => { }}
         >
           <Text style={styles.buttonText}>Document</Text>
         </Button>
@@ -47,14 +51,14 @@ export default function StartScreen({navigation}: Props) {
         <Button
           mode="contained"
           style={[styles.button]}
-          onPress={() => {navigation.navigate("Tutorial")}}
+          onPress={() => { navigation.navigate("Tutorial"); }}
         >
           <Text style={styles.buttonText}>Tutorials</Text>
         </Button>
         <Button
           mode="contained"
           style={[styles.button]}
-          onPress={() => {}}
+          onPress={() => { }}
         >
           <Text style={styles.buttonText}>Assignments</Text>
         </Button>
@@ -73,6 +77,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
     margin: 50,
   },
+  image: {
+    height: 40,
+    width: 45,
+  },
   buttonContainer: {
     flexDirection: "column",
     alignItems: "center",
@@ -80,7 +88,7 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: "rgb(97, 219, 251)",
     borderRadius: 25,
-    marginVertical: 30,
+    marginVertical: 35,
     width: 200,
     height: 50,
     alignContent: "center",
@@ -89,19 +97,20 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 18,
   },
-  userNameText: {
-    fontSize: 25,
-    margin: 17,
-  },
   profileIcon: {
-    margin: 5,
+    marginRight: 25, 
   },
   darkMode: {
-    margin: 12,
+    marginLeft: 25, 
+  },
+  icon: {
+    margin: 7, 
   },
   header: {
     flexDirection: "row",
-    justifyContent: "space-around",
+    alignItems: "center",
+    justifyContent: "space-between",
     width: "100%",
+    margin: 10,
   },
 });
